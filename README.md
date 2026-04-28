@@ -275,7 +275,7 @@ L'application sera accessible sur **http://localhost:5173**
 ## 🌐 Liens de démonstration
 
 Le projet est déployé et accessible en ligne :
-- **Application Web (Frontend)** : [https://agri-smart-rho.vercel.app](https://agri-smart-rho.vercel.app)
+- **Application Web (Frontend)** : [https://agri-smart-y6ti.vercel.app](https://agri-smart-y6ti.vercel.app)
 - **API (Backend)** : [https://agrismart-1-wsk3.onrender.com/api/](https://agrismart-1-wsk3.onrender.com/api/)
 
 *(Veuillez noter que le backend est hébergé sur une instance gratuite Render et peut prendre jusqu'à 50 secondes pour se réveiller lors de la première requête).*
