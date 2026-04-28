@@ -1,0 +1,41 @@
+services:
+  # Django Backend API
+  - type: web
+    name: agrosmart-api
+    runtime: python
+    region: frankfurt
+    plan: free
+    rootDir: backend
+    buildCommand: chmod +x build.sh && ./build.sh
+    startCommand: gunicorn agrosmart.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: CORS_ALLOWED_ORIGINS
+        value: "https://agri-smart.vercel.app,https://agrosmart-frontend.onrender.com"
+      - key: CSRF_TRUSTED_ORIGINS
+        value: "https://agrosmart-api.onrender.com"
+      - key: GEMINI_API_KEY
+        sync: false
+
+  # React Frontend (Static Site)
+  - type: web
+    name: agrosmart-frontend
+    runtime: static
+    region: frankfurt
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
