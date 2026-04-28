@@ -208,7 +208,25 @@ Frontend (React)          API REST (Django)           Base de données
 
 ## 🚀 Installation et exécution
 
-### Prérequis
+### Option 1 : Docker (recommandé) 🐳
+
+```bash
+# Cloner le repo
+git clone https://github.com/Abdelhamidlamtioui/AgriSmart.git
+cd AgriSmart
+
+# Lancer avec Docker Compose
+docker-compose up --build
+```
+
+L'application sera accessible sur **http://localhost:3000**
+
+> Pour activer l'assistant IA, ajoutez votre clé Gemini :
+> ```bash
+> GEMINI_API_KEY=votre_cle docker-compose up --build
+> ```
+
+### Option 2 : Installation manuelle
 - Python 3.10+
 - Node.js 18+
 - npm ou yarn
