@@ -22,20 +22,3 @@ services:
       - key: GEMINI_API_KEY
         sync: false
 
-  # React Frontend (Static Site)
-  - type: web
-    name: agrosmart-frontend
-    runtime: static
-    region: frankfurt
-    plan: free
-    rootDir: frontend
-    buildCommand: npm install && npm run build
-    staticPublishPath: dist
-    headers:
-      - path: /*
-        name: Cache-Control
-        value: public, max-age=0, must-revalidate
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
