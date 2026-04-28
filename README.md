@@ -283,27 +283,41 @@ L'application sera accessible sur **http://localhost:5173**
 
 ---
 
+## 🌐 Liens de démonstration
+
+Le projet est déployé et accessible en ligne :
+- **Application Web (Frontend)** : [https://agri-smart-rho.vercel.app](https://agri-smart-rho.vercel.app)
+- **API (Backend)** : [https://agrismart-1-wsk3.onrender.com/api/](https://agrismart-1-wsk3.onrender.com/api/)
+
+*(Veuillez noter que le backend est hébergé sur une instance gratuite Render et peut prendre jusqu'à 50 secondes pour se réveiller lors de la première requête).*
+
+---
+
 ## 🔧 Défis techniques et compromis
 
-### 1. Pagination serveur vs client
+### 1. Stratégie de déploiement (Le plus grand compromis)
+**Défi** : L'objectif initial était de déployer l'application complète sur un serveur dédié (VPS) à l'aide de l'architecture Docker que j'ai mise en place (`docker-compose.yml`).
+**Solution** : Étant donné les contraintes de temps strictes du test, j'ai opté pour une approche PaaS (Platform as a Service) en séparant le Frontend sur **Vercel** et le Backend sur **Render**. Ce compromis garantit une démonstration en ligne parfaitement stable, sécurisée (gestion automatique du SSL et des environnements) et accessible immédiatement pour l'évaluation, tout en conservant le code Dockerisé pour une éventuelle migration future sur serveur propre.
+
+### 2. Pagination serveur vs client
 **Défi** : Avec 85+ commandes, le chargement complet impactait les performances.
 **Solution** : Pagination serveur personnalisée (`FlexiblePagination`) avec `page_size` dynamique côté frontend.
 
-### 2. Invalidation du cache
+### 3. Invalidation du cache
 **Défi** : Après création d'une commande, le dashboard et la liste n'étaient pas à jour.
 **Solution** : TanStack Query avec `invalidateQueries` ciblé sur les clés `['orders']` et `['kpis']`.
 
-### 3. Sécurité des rôles
+### 4. Sécurité des rôles
 **Défi** : Empêcher les commerciaux d'accéder à la gestion utilisateurs.
 **Solution** : Double protection — backend (vérification `is_staff`/`is_superuser` dans le ViewSet) + frontend (`AdminRoute` + sidebar conditionnelle).
 
-### 4. Traduction Figma → Code
-**Défi** : Reproduire fidèlement le design M3 de Figma sans Tailwind.
-**Solution** : Système de variables CSS mappées 1:1 avec les tokens Figma M3 (primary, surface-container, outline-variant, etc.).
+### 5. Traduction Figma → Code
+**Défi** : Reproduire fidèlement le design M3 de Figma de manière immersive.
+**Solution** : Mise en place d'un système de design CSS vanilla (sans Tailwind pour montrer la maîtrise pure de l'UI), utilisation d'animations subtiles (micro-interactions, fadeSlideUp) et de retours visuels immédiats (feedback) pour garantir une expérience utilisateur engageante et non-statique.
 
-### 5. Intégration IA
+### 6. Intégration IA
 **Défi** : Obtenir des réponses pertinentes en français sur l'agriculture marocaine.
-**Solution** : Prompt engineering avec contexte spécialisé (régions du Maroc, types de sols, saisons).
+**Solution** : Intégration de l'API Google Gemini avec un prompt engineering fournissant un contexte spécialisé.
 
 ---
 
