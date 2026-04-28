@@ -64,9 +64,24 @@ export default function Chat() {
             <p style={{ color: 'var(--text-muted)', fontSize: 13 }}>Posez-moi une question sur les fertilisants, les cultures ou les tendances de vente.</p>
           </div>
         )}
-        {messages.map((msg) => (
-          <div key={msg.id} className={`chat-bubble ${msg.role}`}>{msg.content}</div>
-        ))}
+        {messages.map((msg) => {
+          // Parse basic markdown and line breaks
+          let formattedContent = msg.content
+            .replace(/# # # (.*?)(?:\n|$)/g, '<h4>$1</h4>')
+            .replace(/### (.*?)(?:\n|$)/g, '<h4>$1</h4>')
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/\n/g, '<br/>');
+
+          return (
+            <div 
+              key={msg.id} 
+              className={`chat-bubble ${msg.role}`} 
+              style={{ lineHeight: '1.5' }}
+              dangerouslySetInnerHTML={{ __html: formattedContent }}
+            />
+          );
+        })}
         {isLoading && (
           <div className="chat-bubble assistant">
             <div className="typing-indicator"><span /><span /><span /></div>

@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useOrder } from '../hooks/useApi';
 import { formatMAD, formatDate } from '../lib/utils';
-import { ArrowLeft, CheckCircle } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 
 export default function OrderDetail() {
   const { id } = useParams();

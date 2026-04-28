@@ -1,8 +1,8 @@
 import { useKPIs, useSalesTrends } from '../hooks/useApi';
-import { formatMAD, formatDate, getStatusColor } from '../lib/utils';
+import { formatMAD, formatDate } from '../lib/utils';
 import {
   AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell,
-  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
+  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
 import { TrendingUp, TrendingDown, DollarSign, ShoppingCart, Package, Users } from 'lucide-react';
 
@@ -85,7 +85,7 @@ export default function Dashboard() {
           <h3>Ventes par région</h3>
           <ResponsiveContainer width="100%" height={280}>
             <PieChart>
-              <Pie data={trends?.by_region || []} cx="50%" cy="50%" outerRadius={90} innerRadius={50} dataKey="value" label={({ name, percent }) => `${name?.slice(0, 8)} ${(percent * 100).toFixed(0)}%`} labelLine={false} style={{ fontSize: 10 }}>
+              <Pie data={trends?.by_region || []} cx="50%" cy="50%" outerRadius={90} innerRadius={50} dataKey="value" label={({ name, percent }: any) => `${name?.slice(0, 8)} ${((percent ?? 0) * 100).toFixed(0)}%`} labelLine={false} style={{ fontSize: 10 }}>
                 {trends?.by_region?.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
               </Pie>
               <Tooltip content={<CustomTooltip />} />

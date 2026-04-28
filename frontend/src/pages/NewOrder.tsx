@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useClients, useProducts, useRegions, useCreateOrder, useAISuggest } from '../hooks/useApi';
+import { useClients, useProducts, useCreateOrder, useAISuggest } from '../hooks/useApi';
 import { useQueryClient } from '@tanstack/react-query';
 import { formatMAD } from '../lib/utils';
 import { Check, ChevronRight, ChevronLeft, Sparkles, ShoppingCart, User, Truck, CheckCircle } from 'lucide-react';
@@ -27,7 +27,6 @@ export default function NewOrder() {
 
   const { data: clientsData } = useClients();
   const { data: productsData } = useProducts();
-  const { data: regions } = useRegions();
   const createOrder = useCreateOrder();
   const aiSuggest = useAISuggest();
 

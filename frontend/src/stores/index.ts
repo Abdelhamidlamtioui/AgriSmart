@@ -23,7 +23,7 @@ interface AuthState {
 export const useAuthStore = create<AuthState>((set, get) => ({
   isAuthenticated: !!localStorage.getItem('access_token'),
   user: localStorage.getItem('user_info') ? JSON.parse(localStorage.getItem('user_info')!) : null,
-  login: (username, tokens) => {
+  login: (_username, tokens) => {
     localStorage.setItem('access_token', tokens.access);
     localStorage.setItem('refresh_token', tokens.refresh);
     set({ isAuthenticated: true });
